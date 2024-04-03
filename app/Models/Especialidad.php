@@ -10,12 +10,11 @@ class Especialidad extends Model
     use HasFactory;
 
     //1. vincular la tabla al modelo
-        protected $table = "especialidad";
+        protected $table = "especialidades";//nombre de la tabla en la base de datos
     
     //2. Definicion de campos a modificar o insertar
         protected $fillable = array(
-            'nombre_especialidad',
-            
+            'nombre_especialidad',   
         );
       
 }

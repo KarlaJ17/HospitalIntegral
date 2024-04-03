@@ -58,7 +58,7 @@ class PerfilDoctoresController extends Controller
             'doc_id',
             'nombre',$request->name,
             'especialidad'=>$request->especialidad,
-            'anos_experiencia'=>$request->anos_experiencia,
+            'experiencia'=>$request->anos_experiencia,
             'ubicacion'=>$request->ubicacion,
             'numero_contacto'=>$request->numero_contacto,
             'fecha_nacimiento'=>$request->fecha,

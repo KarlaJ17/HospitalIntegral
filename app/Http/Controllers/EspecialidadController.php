@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+//Importando modelos siempre la primera letra mayuscula
+use App\Models\Especialidad;
+
 use Illuminate\Http\Request;
 
 class EspecialidadController extends Controller
