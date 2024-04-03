@@ -11,42 +11,44 @@ class EspecialidadController extends Controller
     public function index()
     {
         //SELECT *FROM especialidad;
-        $especialidad = Especialidad::all();
+        $especialidades = Especialidad::all();//Nombre del modelo
 
         //Comprobamos si hay almenos 1 
-        if (count($especialidad)<1){
+        if (count($especialidades)<1){
             return response()->json(array(
                 'message'=> "No se encontró la especialidad.",
-                'data'=> $especialidad,
+                'data'=> $especialidades,
                 'code'=> 404,
             ),404);
         }
         
         return response()->json(array(
             'message'=> "Listado de especialidades.",
-            'data'=> $especialidad,
+            'data'=> $especialidades,
             'code'=> 200, 
         ),200);
     }
 
+    //Mostrar una especialidad
+
     public function show(Request $request, string $nombre) //el string es una validacion, si no se pone por defecto sera una cadena de texto
     {
         //SELECT *FROM especialidades WHERE nombre= "?" o ":nombre" LIMIT 1 para especificar que solo se espera un dato;
-        $especialidad = nombre_especialidad::where('nombre', '=', $nombre)->first();
+        $especialidad = especialidad::where('nombre', '=', $nombre)->first();
 
         //Validando si hay almenos 1 cliente
 
-        if ($doctores == NULL){
+        if ($especialidad == NULL){
             return response()->json(array(
                 'message'=> "Especialidad no encontrada.",
-                'data'=> $nombre_especialidad,
+                'data'=> $especialidad,
                 'code'=> 404,
             ),404);
         }
         
         return response()->json(array(
             'message'=> "Especialidad encontrada exitosamente.",
-            'data'=> $nombre_especialidad,
+            'data'=> $especialidad,
             'code'=> 200, 
         ),200);
 
