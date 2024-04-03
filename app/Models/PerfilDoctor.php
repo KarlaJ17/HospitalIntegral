@@ -18,7 +18,7 @@ class PerfilDoctores extends Model
             'doc_id',
             'nombre',
             'especialidad',
-            'anos_experiencia',
+            'experiencia',
             'ubicacion',
             'numero_contacto',
             'fecha_nacimiento',
