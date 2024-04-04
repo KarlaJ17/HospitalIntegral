@@ -17,7 +17,7 @@ class Horario extends Model
             'doctor_id',
             'perfil_id',
             'nombre',
-            'dia',
+            'fecha',
             'hora',
             'estado',
           

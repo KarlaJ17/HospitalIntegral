@@ -153,12 +153,12 @@ class CitaController extends Controller
     }
 
     //PREGUNTAR SI SE BUSCARIA POR DIA Y HORA O SOLO POR DIA, COMO RESTRINGIR LA FECHA Y HORA
-    public function showHorario(Request $request, string $dia, string $hora) //el string es una validacion, si no se pone por defecto sera una cadena de texto
+    public function showHorario(Request $request, string $fecha, string $hora) //el string es una validacion, si no se pone por defecto sera una cadena de texto
     {
         //SELECT *FROM Doctor WHERE dia= "?" o ":dia" LIMIT 1 para especificar que solo se espera un dato;
-        $horario = Horario::where('dia', '=', $dia)
+        $horario = Horario::where('fecha', '=', $fecha)
                             ->where('hora','=', $hora)
-                            ->get();//para v er todas las disponibles.
+                            ->get();//para ver todas las disponibles.
 
         //Validando si hay almenos 1 dia y hora
 
@@ -185,7 +185,7 @@ class CitaController extends Controller
             'doctor_id',$request->doctor_id,
             'perfil_id',$request->perfil_id,
             'nombre',$request->nombre,
-            'dia',$request->dia,
+            'fecha',$request->fecha,
             'hora',$request->hora,
             'estado',$request->estado,
         );
@@ -210,12 +210,12 @@ class CitaController extends Controller
 
     //Actualizar un horario en especifico.
 
-    public function updateHorario(Request $request, string $dia)
+    public function updateHorario(Request $request, string $fecha)
     {
         //$request -> validated();//Agregar esta linea cuando se haya hecho el archivo request
 
         //1.validar los datos
-        $horario = Horario::where('dia', '=', $dia);
+        $horario = Horario::where('fecha', '=', $fecha);
 
         //2.Verificar la existencia del registro
         if ($horario == NULL){
@@ -232,7 +232,7 @@ class CitaController extends Controller
         $horario->doctor_id=$request->doctor_id;
         $horario->perfil_id=$request->perfil_id;
         $horario->nombre=$request->nombre;
-        $horario->dia=$request->dia;
+        $horario->fecha=$request->fecha;
         $horario->hora=$request->hora;
         $horario->estado=$request->estado;
 
@@ -249,6 +249,4 @@ class CitaController extends Controller
             'code'=> 200, 
         ),200);
     }
-
-
 }
