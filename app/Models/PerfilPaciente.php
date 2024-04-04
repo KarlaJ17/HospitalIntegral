@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class PerfilPaciente extends Model
 {
     use HasFactory;
+    //1. vincular tabla al modelo
+    protected $table = "PerfilPacientes";
+
+    //2. Definición de campo a modificar o insertar
+    protected $fillable = array(
+        'nombre_completo',
+        'email',
+        'telefono',
+        'password',
+    );
+
+
 }
