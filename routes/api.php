@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EspecialidadController; //<-Importación
 use App\Http\Controllers\PerfilDoctorController;
 use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\CitaController; //cita y horario en el mismo controller
 
 /*
 |--------------------------------------------------------------------------
@@ -88,21 +88,44 @@ Route::post('doctor/store',array(
 ))->name('doctor.store'); 
 
 
-//RUTAS HorarioController
+
+//RUTAS CitaController
+
+//HorarioModel
 //http://localhost:8000/api/horario/index
 Route::get('/horario/index',array(   //el mismo nombre de abajo 
-    HorarioController::class, //controlador
-    'index', //metodo
+    CitaController::class, //controlador
+    'indexHorario', //metodo
 ))->name('horario.index');  //poner el nombre de la ruta despues del punto controlador/metodo
 
 //http://localhost:8000/api/horario/show/karla
-Route::get('horario/show/{nombre}',array(   //
-    HorarioController::class,
-    'show',
+Route::get('horario/show/{dia}/{hora}',array(   //
+    CitaController::class,
+    'showHorario',
 ))->name('horario.show'); 
 
 //http://localhost:8000/api/horario/store
 Route::post('horario/store',array(   
-    HorarioController::class,
-    'store',
+    citaController::class,
+    'storeHorario',
 ))->name('horario.store'); 
+
+
+//CitaModel
+//http://localhost:8000/api/cita/index
+Route::get('/cita/index',array(   //el mismo nombre de abajo 
+    CitaController::class, //controlador
+    'index', //metodo
+))->name('cita.index');  //poner el nombre de la ruta despues del punto controlador/metodo
+
+//http://localhost:8000/api/cita/show/karla
+Route::get('cita/show/{fecha}',array(   //
+    CitaController::class,
+    'show',
+))->name('cita.show'); 
+
+//http://localhost:8000/api/cita/store
+Route::post('cita/store',array(   
+    CitaController::class,
+    'store',
+))->name('cita.store'); 
