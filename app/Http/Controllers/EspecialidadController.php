@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 class EspecialidadController extends Controller
 {
     //Lista de todas las especialidades
+    //http://localhost:8000/api/especialidad/index
 
     public function index()
     {
@@ -33,11 +34,12 @@ class EspecialidadController extends Controller
     }
 
     //Mostrar una especialidad
+    //http://localhost:8000/api/especialidad/show/oftalmologo
 
     public function show(Request $request, string $nombre) //el string es una validacion, si no se pone por defecto sera una cadena de texto
     {
-        //SELECT *FROM especialidades WHERE nombre= "?" o ":nombre" LIMIT 1 para especificar que solo se espera un dato;
-        $especialidad = especialidad::where('nombre', '=', $nombre)->first();
+        //SELECT *FROM especialidades WHERE nombre= "?" o ":nombre" ;
+        $especialidad = especialidad::where('nombre', '=', $nombre);
 
         //Validando si hay almenos 1 cliente
 
@@ -56,4 +58,35 @@ class EspecialidadController extends Controller
         ),200);
 
     }
+
+    //3. Registrar una nueva especialidad.
+    //http://localhost:8000/api/especialidad/store
+    public function store()
+    {
+        $data =array(
+            'nombre_especialidad',  
+        
+        );
+        //INSERT INTO $newEspecialidad () VALUES();
+        $newEspecialidad = new Especialidad($data);
+
+        if ($newEspecialidad->save()== false){
+            return response()->json(array(
+                'message'=> "Especialidad no procesada.",
+                'data'=> $newEspecialidad,
+                'code'=> 422,
+            ),422);
+        }
+        
+        return response()->json(array(
+            'message'=> "Especialidad guardada con exito.",
+            'data'=> $newEspecialidad,
+            'code'=> 201, 
+        ),201);
+
+
+    }
+
+
+
 }
