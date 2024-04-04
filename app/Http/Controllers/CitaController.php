@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Cita; //llamar al modelo
+use App\Models\Horario;
+
 
 
 class CitaController extends Controller

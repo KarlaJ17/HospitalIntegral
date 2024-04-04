@@ -129,3 +129,6 @@ Route::post('cita/store',array(
     CitaController::class,
     'store',
 ))->name('cita.store'); 
+
+
+
