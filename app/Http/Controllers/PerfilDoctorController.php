@@ -62,9 +62,8 @@ class PerfilDoctorController extends Controller
             'ubicacion'=>$request->ubicacion,
             'numero_contacto'=>$request->numero_contacto,
             'fecha_nacimiento'=>$request->fecha,
-            'instagram'=>$request->instagram,
-            'whatsapp'=>$request->whatsapp,
-            'facebook'=>$request->facebook,
+            'redes_sociales'=>$request->redes_sociales,
+           
         
         );
         //INSERT INTO $perfil_doctor () VALUES();
@@ -107,15 +106,15 @@ class PerfilDoctorController extends Controller
         //3.Sobreescribimos la info existente
         //la variable trae la info del perfil UPDATE perfil SET names = ? WHERE dui = ?
 
+        $perfil->redes_sociales_id=$request->redes_sociales_id;
         $perfil->nombre=$request->nombre;
         $perfil->especialidad=$request->especialidad;
-        $perfil->experiencie=$request->experiencia;
+        $perfil->experience=$request->experience;
         $perfil->ubicacion=$request->ubicacion;
         $perfil->numero_contacto=$request->numero_contacto;
         $perfil->fecha_nacimiento=$request->fecha;
-        $perfil->instagram=$request->instagram;
-        $perfil->whatsapp=$request->whatsapp;
-        $perfil->facebook=$request->whatsapp;
+      
+        
 
         if ($perfil->save()== false){
             return response()->json(array(

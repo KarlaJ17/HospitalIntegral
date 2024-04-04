@@ -64,7 +64,7 @@ class EspecialidadController extends Controller
     public function store()
     {
         $data =array(
-            'nombre_especialidad',  
+            'nombre_especialidad', $request->nombre_especialidad, 
         
         );
         //INSERT INTO $newEspecialidad () VALUES();

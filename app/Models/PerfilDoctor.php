@@ -16,14 +16,13 @@ class PerfilDoctor extends Model
     //2. Definicion de campos a modificar o insertar
         protected $fillable = array(
             'doc_id',
+            'redes_sociales_id',
             'nombre',
             'especialidad',
-            'experiencia',
+            'experience',
             'ubicacion',
             'numero_contacto',
             'fecha_nacimiento',
-            'instagram',
-            'whatsapp',
-            'facebook',
+            
         );
 }
