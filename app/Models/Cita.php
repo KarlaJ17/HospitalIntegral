@@ -12,11 +12,12 @@ class Cita extends Model
     protected $table = "citas";
     
     //2. Definicion de campos a modificar o insertar
+    //Preguntar si creamos una tabla puente que contenta el estado de la cita
         protected $fillable = array(
             'paciente_id',
             'horario_id',
             'fecha',
-            'agendadar',
+            'agendar',
             'reprogramar',
             'cancelar',
         );

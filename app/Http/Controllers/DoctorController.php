@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//importando Request de validaciones
+use App\Http\Requests\DoctorRequest;
+
 use App\Models\Doctor; //llamar al modelo
 
 class DoctorController extends Controller

@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+//importando Request de validaciones
+use App\Http\Requests\HorarioRequest;
+use App\Http\Requests\CitaRequest;
+
 use App\Models\Cita; //llamar al modelo
 use App\Models\Horario;
 
@@ -155,6 +159,7 @@ class CitaController extends Controller
     //PREGUNTAR SI SE BUSCARIA POR DIA Y HORA O SOLO POR DIA, COMO RESTRINGIR LA FECHA Y HORA
     public function showHorario(Request $request, string $fecha, string $hora) //el string es una validacion, si no se pone por defecto sera una cadena de texto
     {
+        //CONSULTAR POR REVISION DE IF
         //SELECT *FROM Doctor WHERE dia= "?" o ":dia" LIMIT 1 para especificar que solo se espera un dato;
         $horario = Horario::where('fecha', '=', $fecha)
                             ->where('hora','=', $hora)
@@ -178,8 +183,11 @@ class CitaController extends Controller
 
     }
     //3. Registrar un nuevo horario disponible.
+
+    //Aqui van los request 
     public function storeHorario(Request $request)
     {
+        $request -> validated();//Agregar esta linea cuando se haya hecho el archivo request
         $data =array(
            
             'doctor_id',$request->doctor_id,
@@ -228,6 +236,7 @@ class CitaController extends Controller
 
         //3.Sobreescribimos la info existente
         //la variable trae la info del perfil UPDATE perfil SET names = ? WHERE dui = ?
+        //Solo se llaman los request
 
         $horario->doctor_id=$request->doctor_id;
         $horario->perfil_id=$request->perfil_id;
