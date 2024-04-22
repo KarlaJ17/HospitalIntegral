@@ -4,13 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Paciente; //llamar al modelo
+use App\Models\PerfilPaciente; //llamar al modelo
 
 class PerfilPacienteController extends Controller
 {
     public function index(){
         //SELECT * FROM perfil
         $pacientes= PerfilPaciente::all(); //Ejemplo del modelo
+
         //Validando los perfiles del paciente si hay uno o más
         if (count($pacientes)<1)
         {
@@ -23,7 +24,7 @@ class PerfilPacienteController extends Controller
         }
         
         return response()->json(array(
-            'message'=>"Perfiles de pacioentes disponibles",
+            'message'=>"Perfiles de pacientes disponibles",
             'data'=>$pacientes,
             'code'=>200,
         ),200);
@@ -79,7 +80,42 @@ public function store(Request $request)
         'data'=> $newPaciente,
         'code'=> 201, 
     ),201);
+}
+#Actualización un cliente en especifico
+public function update(Request $request, string $nombre)
+{
+    # $request -> validated(); Se agrega está linea cuando hay request
+    # I. Validar los datos
+    $perfil =PerfilPaciente::where('nombre','=',$nombre);
+    #II Verificar la existencia de registro 
+    if ($perfil==NULL){
+        return response()->json(array(
+            'message'=>"Perfil de paciente",
+            'data'=>$perfil,
+            'code'=>404,
+        ),400);
+    }
 
+# III. Actualizar información existente
+#La variable tare la info del perfil 
+$perfil->dui=$request->dui;
+$perfil->genero=$request->genero;
+$perfil->nacionalidad=$request->nacionalidad;
+$perfil->departamento=$request->departamento;
+$perfil->email=$request->email;
+$perfil->nacimiento=$request->nacimiento;
 
+if ($perfil->save()== false){
+    return response()->json(array(
+        'message'=>"Perfil de Paciente no actualizado",
+        'data'=> $perfil,
+        'code'=>422,
+    ),422);
+}
+return response()->json(array(
+    'message'=>"Perfil de Pacientes actualizado con exito",
+    'data'=>$perfil,
+    'code'=>200,
+),200);
 }
 }
