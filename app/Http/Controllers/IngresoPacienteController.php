@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\IngresoPaciente; //Llamar al modelo
+use App\Models\Paciente; //Llamar al modelo
 
 class IngresoPacienteController extends Controller{
 

@@ -5,19 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class IngresoPaciente extends Model
+class Pacientes extends Model
 {
     use HasFactory;
     //1. vincular tabla al modelo
-    protected $table = "PerfilPacientes";
+    protected $table = "Pacientes";
 
     //2. Definición de campo a modificar o insertar
     protected $fillable = array(
-        'dui',
-        'genero',
-        'nacionalidad',
-        'departamento',
+        'id',
+        'citas_id',
+        'nombre_completo',
         'email',
-        'nacimiento',
+        'telefono',
+        'password',
     );
+
+
 }
