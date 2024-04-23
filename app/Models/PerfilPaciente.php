@@ -9,7 +9,7 @@ class Pacientes extends Model
 {
     use HasFactory;
     //1. vincular tabla al modelo
-    protected $table = "Pacientes";
+    protected $table = "pacientes";
 
     //2. Definición de campo a modificar o insertar
     protected $fillable = array(

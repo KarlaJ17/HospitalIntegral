@@ -10,7 +10,7 @@ class ValoracionController extends Controller
 {
     public function index(){
         //SELECT * FROM perfil
-        $valoraciones= valoracion::all(); //Ejemplo del modelo
+        $valoraciones= Valoracion::all(); //Ejemplo del modelo
         //Validando las validaciones 
         if (count($valoraciones)<1)
         {
