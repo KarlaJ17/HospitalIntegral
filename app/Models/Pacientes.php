@@ -14,7 +14,6 @@ class Pacientes extends Model
     //2. Definición de campo a modificar o insertar
     protected $fillable = array(
         'id',
-        'citas_id',
         'nombre_completo',
         'email',
         'telefono',
