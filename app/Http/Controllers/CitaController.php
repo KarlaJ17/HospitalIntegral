@@ -292,4 +292,141 @@ class CitaController extends Controller
         ),200);
 
     } 
+
+    //PacienteCitaController
+
+    public function indexPacienteCita()
+    {
+        //SELECT *FROM Horario;
+        $pacientecitas = PacienteCita::all(); //tal cual como el modelo
+
+        //Validando si hay almenos 1 perfil de doctor o mas.
+        if (count($pacientecitas)<1){
+            return response()->json(array(
+                'message'=> "No se encontraron Datos disponibles.",
+                'data'=> $pacientecitas, //infomracion que trae
+                'code'=> 404,
+            ),404);
+        }
+        
+        return response()->json(array(
+            'message'=> "Datos disponibles.",
+            'data'=> $pacienteCitas,
+            'code'=> 200, 
+        ),200);
+    }
+
+    public function showPacienteCita(Request $request, string $nombre) //el string es una validacion, si no se pone por defecto sera una cadena de texto
+    {
+      
+        $referencia = referencia::where('nombre', '=', $nombre)->first();
+
+        //Validando si hay almenos 1 nombre
+
+        if ($pacienteCita == NULL){
+            return response()->json(array(
+                'message'=> "Cita no disponible.",
+                'data'=> $pacienteCita,
+                'code'=> 404,
+            ),404);
+        }
+        
+        return response()->json(array(
+            'message'=> "Cita encontrado exitosamente.",
+            'data'=> $pacienteCita,
+            'code'=> 200, 
+        ),200);
+
+    }
+    //3. Registrar un nuevo horario disponible.
+
+    //Aqui van los request 
+    public function storePacienteCita(Request $request)
+    {
+        $request -> validated();//Agregar esta linea cuando se haya hecho el archivo request
+        $data =array(
+           
+            'cita_id',$request->cita_id,
+            'paciente_id',$request->paciente_id,
+            'doctor_id',$request->doctor_id,
+        );
+
+        //INSERT INTO $horario() VALUES();
+        $newHorario = new Horario($data);
+
+        if ($newHorario->save()== false){
+            return response()->json(array(
+                'message'=> "Información de horario no procesada.",
+                'data'=> $newHorario,
+                'code'=> 422,
+            ),422);
+        }
+        
+        return response()->json(array(
+            'message'=> "Horario guardado con exito.",
+            'data'=> $newHorario,
+            'code'=> 201, 
+        ),201);
+
+    }
+
+    //Actualizar un horario en especifico.
+
+    public function updateHoraro(Request $request, string $fecha)
+    {
+        //$request -> validated();//Agregar esta linea cuando se haya hecho el archivo request
+
+        //1.validar los datos
+        $horario = Horario::where('fecha', '=', $fecha);
+
+        //2.Verificar la existencia del registro
+        if ($horario == NULL){
+            return response()->json(array(
+                'message'=> "Horario no encontrado.",
+                'data'=> $horario,
+                'code'=> 404,
+            ),404);
+        }
+
+        //3.Sobreescribimos la info existente
+        //la variable trae la info del perfil UPDATE perfil SET names = ? WHERE dui = ?
+        //Solo se llaman los request
+
+        $horario->doctor_id=$request->doctor_id;
+        $horario->perfil_id=$request->perfil_id;
+        $horario->nombre=$request->nombre;
+        $horario->fecha=$request->fecha;
+        $horario->hora=$request->hora;
+        $horario->estado=$request->estado;
+
+        if ($horario->save()== false){
+            return response()->json(array(
+                'message'=> "Horario no actualizado.",
+                'data'=> $horario,
+                'code'=> 422,
+            ),422);
+        }
+        return response()->json(array(
+            'message'=> "Horario actualizado con exito.",
+            'data'=> $horario,
+            'code'=> 200, 
+        ),200);
+    }
+    //Inserta un nuevo elemeto la tabla
+    public function deleteHorario(Request $request){
+
+        $id = $request->id;
+
+        //SELECT *FROM categorias WHERE id=1;
+        $horario=horario::find($id);
+
+        $horario-> delete();
+
+        return response()->json(array(
+            'message'=> "horario eliminado",
+            'data'=>$horario,
+            'code'=>200,
+        ),200);
+
+    } 
 }
