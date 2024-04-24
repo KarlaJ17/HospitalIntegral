@@ -116,5 +116,24 @@ class RecetaController extends Controller
             'data'=> $receta,
             'code'=> 200, 
         ),200);
+
     }
+
+    //
+    public function delete(Request $request){
+
+        $id = $request->id;
+
+        //SELECT *FROM recetas WHERE id=1;
+        $receta=receta::find($id);
+
+        $receta-> delete();
+
+        return response()->json(array(
+            'message'=> "receta eliminada",
+            'data'=>$receta,
+            'code'=>200,
+        ),200);
+
+    } 
 }

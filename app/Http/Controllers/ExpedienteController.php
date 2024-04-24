@@ -127,4 +127,21 @@ class ExpedienteController extends Controller
             'code'=> 200, 
         ),200);
     }
+    //Inserta un nuevo elemeto la tabla
+    public function delete(Request $request){
+
+        $id = $request->id;
+
+        //SELECT *FROM expedientes WHERE id=1;
+        $expediente=expediente::find($id);
+
+        $expediente-> delete();
+
+        return response()->json(array(
+            'message'=> "expediente eliminado",
+            'data'=>$expediente,
+            'code'=>200,
+        ),200);
+
+    } 
 }

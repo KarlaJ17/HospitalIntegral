@@ -118,4 +118,21 @@ class ReferenciaController extends Controller
             'code'=> 200, 
         ),200);
     }
+    //Inserta un nuevo elemeto la tabla
+    public function delete(Request $request){
+
+        $id = $request->id;
+
+        //SELECT *FROM referencias WHERE id=1;
+        $referencia=referencia::find($id);
+
+        $referencia-> delete();
+
+        return response()->json(array(
+            'message'=> "referencia eliminada",
+            'data'=>$referencia,
+            'code'=>200,
+        ),200);
+
+    } 
 }
