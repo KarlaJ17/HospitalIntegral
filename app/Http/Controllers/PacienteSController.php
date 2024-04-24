@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Paciente; //Llamar al modelo
+use App\Models\Pacientes; //Llamar al modelo
 
-class IngresoPacienteController extends Controller{
+class IngresoPacientesController extends Controller{
 
 
     public function index(){
@@ -17,14 +17,14 @@ class IngresoPacienteController extends Controller{
         if (count($pacientes)<1){
             return response()->json(array(
                 'message'=> "No se encontró perfiles de pacientes registrados.",
-                'data'=> $paciente, //Extraer información
+                'data'=> $pacientes, //Extraer información
                 'code'=> 404,
             ),404);
         }
         
         return response()->json(array(
             'message'=> "Perfiles de pacientes registrados",
-            'data'=> $paciente,
+            'data'=> $pacientes,
             'code'=> 200, 
         ),200);
     }
@@ -37,13 +37,13 @@ class IngresoPacienteController extends Controller{
         if ($paciente==NULL){
             return respose()->json(array(
                 'message'=>"Registro de Paciente no encotrado",
-                'data'=>$paciente,
+                'data'=>$pacientes,
                 'code'=>404,
             ),404);
         }
         return response()->json(array(
             'message'=>"Registro de paciente encontrado exitosamente",
-            'data'=>$paciente,
+            'data'=>$pacientes,
             'code'=>200,
         ),200);
     }
@@ -51,25 +51,24 @@ class IngresoPacienteController extends Controller{
     public function store(Request $request)
     {
         $data=array(
-            'citas_id',$request->citas_id,
             'nombre_completo',$request->nombre_completo,
             'email',$request->email,
             'telefono',$request->telefono,
             'password',$request->password,
         );
         #INSERT INTO $Paciente 
-        $newPaciente = new Paciente($data);
+        $newPacientes = new Paciente($data);
 
         if ($newPaciente->save()==false){
             return response()->json(array(
                 'message'=>"Registo de paciente no procesado",
-                'data'=>$newPaciente,
+                'data'=>$newPacientes,
                 'code'=>422,
             ),422);
         }
         return response()->json(array(
             'message'=>"Paciente registrado con exito",
-            'data'=>$newPaciente,
+            'data'=>$newPacientes,
             'code'=>201,
         ),201);
     }
@@ -86,13 +85,27 @@ class IngresoPacienteController extends Controller{
         if ($Paciente== NULL){
             return response()->json(array(
                 'mesage'=>"Registro de Paciente no encontrado",
-                'data'=>$paciente,
+                'data'=>$pacientes,
                 'code'=>404,
             ),404);
         }
         
-        #3. Sobreescribimos la información existente
+        #3. Sobreescribimos la información existente UPDATE
+        #UPDATE
+        #La variable trae la info del perfil update 
+        $perfil->nombre_completo=$request->nombre_completo;
+        $perfil->email=$request->email;
+        $perfil->telefono=$request->telefono;
+        $perfil->password=$request->password;
+
+        if ($perfil->save()==false){
+            return response()->json(array(
+                'message'=>"Perfil de Paciente actualizado",
+                'data'=>$pacientes,
+                'cade'=>200,
+            ),200);
         }
 
 
+}
 }
