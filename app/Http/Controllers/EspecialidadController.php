@@ -61,7 +61,7 @@ class EspecialidadController extends Controller
 
     //3. Registrar una nueva especialidad.
     //http://localhost:8000/api/especialidad/store
-    public function store()
+    public function store(Request $request)
     {
         $data =array(
             'nombre_especialidad', $request->nombre_especialidad, 

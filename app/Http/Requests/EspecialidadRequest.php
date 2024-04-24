@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DoctorRequest extends FormRequest
+class EspecialidadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,21 +26,10 @@ class DoctorRequest extends FormRequest
         return [
              //Nombres segun request de controller metodo store siempre
 
-             'paciente_id'=>array(
+             'nombre_especialidad'=>array(
                 'required' 
              ),
-             'nombre'=>array(
-                 'required' 
-              ),
-              //falta validacion de correo
-             'email'=>array(
-                 'required','regex:[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}'
-             ),
-             'password'=>array(
-                'required'
-             ),
-          
-            
+             
         ];
     }
 }
