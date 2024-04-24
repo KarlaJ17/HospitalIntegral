@@ -39,7 +39,6 @@ class DoctorRequest extends FormRequest
              'password'=>array(
                 'required'
              ),
-          
             
         ];
     }
