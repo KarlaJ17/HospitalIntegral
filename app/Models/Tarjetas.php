@@ -12,9 +12,11 @@ class Tarjetas extends Model
     protected $fillable = array(
         'id',
         'perf_id',
-        'monto_id',
+        'pago_id',
         'tipo_tarjeta',
-        'vencimiento',
+        'numero',
+        'exp_month',
+        'exp_year',
         'cvv',
     );
 }

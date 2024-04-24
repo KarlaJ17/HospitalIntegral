@@ -115,7 +115,7 @@ class CitaController extends Controller
         $cita->horario_id=$request->horario_id;
         $cita->fecha=$request->fecha;
         $cita->agendadar=$request->agrendada;
-        $cita->reprograr=$request->reprogramar;
+        $cita->reprogramar=$request->reprogramar;
         $cita->cancelar=$request->cancelar;
     
 
