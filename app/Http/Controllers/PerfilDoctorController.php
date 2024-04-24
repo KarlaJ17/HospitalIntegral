@@ -56,13 +56,14 @@ class PerfilDoctorController extends Controller
     {
         $data =array(
             'doc_id',$request->doc_id,
+            'redes_sociales_id'=>$request->redes_sociales_id,
             'nombre',$request->name,
             'especialidad'=>$request->especialidad,
             'experiencie'=>$request->experiencie,
             'ubicacion'=>$request->ubicacion,
             'numero_contacto'=>$request->numero_contacto,
             'fecha_nacimiento'=>$request->fecha,
-            'redes_sociales'=>$request->redes_sociales,
+           
            
         
         );

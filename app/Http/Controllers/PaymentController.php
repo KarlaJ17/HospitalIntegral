@@ -24,39 +24,39 @@ class PaymentController extends Controller
 
 
     //Obtener o crear ID de cliente para la pasarela. 
-    public function getOrCreateCustomer(int $pacienteId){
+    public function getOrCreatePaciente(int $pacienteId){
 
         //Obtenemos el cliente segun id
         $pacientesId = Paciente::where('id', '=', $pacienteId)->first();
 
         //Verificamos que exista el cliente. 
-        if ($customer == NULL) {
+        if ($paciente == NULL) {
             return NULL;
         }
 
         //Si existe, verificamos si tiene custumer_uid
-        if ($customer->customer_uid == NULL) {
+        if ($paciente->paciente_uid == NULL) {
             //Generamos el UID por medio de Stripe
-           $newCustomerUid =  $this->stripe->customers->create(array(
-                'name' => $customer->names,
+           $newPacienteUid =  $this->stripe->pacientes->create(array(
+                'name' => $paciente->names,
                 'email' => "pay@test.com"
             ));
 
            
             //Asignamos el valor del UID al cliente
-            $customer->customer_uid = $newCustomerUid->id;
-            $customer->save();//Guardar los cambios. 
+            $paciente->paciente_uid = $newpacienteUid->id;
+            $paciente->save();//Guardar los cambios. 
         }
 
-        return $customer->customer_uid;
+        return $paciente->paciente_uid;
     }
 
     //Genera un ID para la tarjeta de forma temporal. **Codifica la informacion para que no se vea bulnerable cuando viaja. 
-        public function createCard($cardDetails, $customerId)
+        public function createCard($cardDetails, $pacienteId)
     {
         //Generamos el ID de tarjeta temporal
-        $paymentMethod = $this->stripe->customers->createSource(
-            $customerId,
+        $paymentMethod = $this->stripe->pacientes->createSource(
+            $pacienteId,
             array(
                // 'source'=>array(
                 //     'number'=>4242424242424242,
@@ -82,42 +82,46 @@ class PaymentController extends Controller
 
         //Buscamos el cliente según el dui con el que se registro
 
-        $customer= Customer::where('dui','=',$dui)->first();
+        $paciente= paciente::where('dui','=',$dui)->first();
 
-        if ($customer == NULL){
+        if ($paciente == NULL){
             return response()->json(array(
-                'message'=>"Cliente no encontrado",
-                'data'=> $customer,
+                'message'=>"Paciente no encontrado",
+                'data'=> $paciente,
                 'code'=>404,
             ),404);
         }
 
         //Obtenemos o creamos el Token (ID de stripe) del cliente
         //esto es de Programacion Orientada a Objetos
-        $customerToken =$this-> getOrCreateCustomer($customer->id);
+        $pacienteToken =$this-> getOrCreatepaciente($paciente->id);
 
         //Recolectar los datos de la tarjeta 
         $cardDetails=array(
-            'number'=> $request->card_number,
-            'exp_month'=>$request->exp_month,
-            'exp_year'=>$request->exp_year,
-            'object'=>'card'
+    
+            'perf_id'=> $request->perf_id,
+            'pago_id'=> $request->pago_id,
+            'tipo_tarjeta'=> $request->tipo_tarjeta,
+            'numero'=> $request->numero,
+            'exp_month'=> $request->exp_month,
+            'exp_year'=> $request->exp_year,
+            'cvv'=> $request->cvv,
         );
         //Generamos el ID teporal de la tarjeta 
-        $cardToken =$this->createCard($cardDetails, $customerToken);
+        $cardToken =$this->createCard($cardDetails, $pacienteToken);
 
         //Obtener la información de pago
 
         //Monto a pagar (ctvs)
         $amount =$request->amount *100; //->$1.00=100
-        $concept = "Pago por compra online.";
+        $concept = "Pago por cita online.";
 
         //Generar el cargo, es lo que se envia a la plataforma
         $charge=$this->stripe->charges->create(array(
             'amount'=> $amount,
             'currency'=> 'usd', //Moneda de pago
             'source' =>$cardToken, //Metodo de pago o tarjeta a pagar
-            'customer'=> $customerToken,//Cliente que paga
+            'paciente'=> $pacienteToken,//Cliente que paga
             'description'=>$concept,//El porque o el que se estan pagando
         ));
     }
@@ -125,12 +129,13 @@ class PaymentController extends Controller
         public function store(PaymentRequest $request){
             $request->validated();
             $data = array(
-                'dui' => $request->dui, 
-                'amount' => $request->amount, 
-                'number' => $request->number, 
-                'exp_month' =>$request->exp_month,
-                'exp_year' =>$request->exp_year,
-                
+                'perf_id'=> $request->perf_id,
+                'pago_id'=> $request->pago_id,
+                'tipo_tarjeta'=> $request->tipo_tarjeta,
+                'numero'=> $request->numero,
+                'exp_month'=> $request->exp_month,
+                'exp_year'=> $request->exp_year,
+                'cvv'=> $request->cvv,
             );
         
 

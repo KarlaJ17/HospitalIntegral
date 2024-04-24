@@ -100,7 +100,7 @@ class ReferenciaController extends Controller
         //3.Sobreescribimos la info existente
         //la variable trae la info del referencia UPDATE referencia SET names = ? WHERE dui = ?
 
-        $referencia->expediente_is=$request->expediente_is;
+        $referencia->expediente_id=$request->expediente_id;
         $referencia->especialidad_id=$request->especialidad_id;
         $referencia->diagnostico=$request->diagnostico;
      
