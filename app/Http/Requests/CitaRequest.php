@@ -30,7 +30,7 @@ class CitaRequest extends FormRequest
                 'required' 
              ),
              'horario_id'=>array(
-                 'required' 
+                 'required', 'date'
               ),
              'fecha'=>array(
                  'required','date'
