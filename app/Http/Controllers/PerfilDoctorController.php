@@ -147,5 +147,48 @@ class PerfilDoctorController extends Controller
         ),200);
 
     } 
+    #Controller RedSocial 
+    public function indexRedSocial() 
+    {
+        //SELECT *FROM perfil_doctor;
+        $RedSocials = RedSocial::all(); //tal cual como el modelo
+
+        //Validando si hay almenos 1 RedSocial de doctor o mas.
+        if (count($RedSocials)<1){
+            return response()->json(array(
+                'message'=> "No se encontraron RedSocials de pacientes.",
+                'data'=> $RedSocials, //infomracion que trae
+                'code'=> 404,
+            ),404);
+        }
+        
+        return response()->json(array(
+            'message'=> "RedSocials de pacientes disponibles.",
+            'data'=> $RedSocial,
+            'code'=> 200, 
+        ),200);
+    }
+
+    public function showRedSocial(Request $request, string $nombre) //el string es una validacion, si no se pone por defecto sera una cadena de texto
+    {
+        //SELECT *FROM RedSocial doctor WHERE nombre= "?" o ":nombre" LIMIT 1 para especificar que solo se espera un dato;
+        $RedSocial = RedSocial::where('nombre', '=', $nombre)->first();
+
+        //Validando si hay almenos 1 cliente
+
+        if ($RedSocial == NULL){
+            return response()->json(array(
+                'message'=> "RedSocialno encontrado.",
+                'data'=> $RedSocial,
+                'code'=> 404,
+            ),404);
+        }
+        
+        return response()->json(array(
+            'message'=> "RedSocial  encontrado exitosamente.",
+            'data'=> $RedSocial,
+            'code'=> 200, 
+        ),200);
+    }
 
 }
