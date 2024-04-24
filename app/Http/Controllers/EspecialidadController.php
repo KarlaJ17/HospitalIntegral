@@ -86,7 +86,22 @@ class EspecialidadController extends Controller
 
 
     }
+    //
+    public function delete(Request $request){
 
+        $id = $request->id;
 
+        //SELECT *FROM especialidads WHERE id=1;
+        $especialidad=especialidad::find($id);
+
+        $especialidad-> delete();
+
+        return response()->json(array(
+            'message'=> "especialidad eliminada",
+            'data'=>$especialidad,
+            'code'=>200,
+        ),200);
+
+    } 
 
 }

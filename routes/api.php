@@ -111,7 +111,7 @@ Route::post('horario/store',array(
 ))->name('horario.store'); 
 
 
-//CitaModel
+//CitaModel 
 //http://localhost:8000/api/cita/index
 Route::get('/cita/index',array(   //el mismo nombre de abajo 
     CitaController::class, //controlador

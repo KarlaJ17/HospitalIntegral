@@ -123,4 +123,21 @@ class DoctorController extends Controller
             'code'=> 200, 
         ),200);
     }
+    //Inserta un nuevo elemeto la tabla
+    public function delete(Request $request){
+
+        $id = $request->id;
+
+        //SELECT *FROM doctors WHERE id=1;
+        $doctor=doctor::find($id);
+
+        $doctor-> delete();
+
+        return response()->json(array(
+            'message'=> "doctor eliminado",
+            'data'=>$doctor,
+            'code'=>200,
+        ),200);
+
+    } 
 }

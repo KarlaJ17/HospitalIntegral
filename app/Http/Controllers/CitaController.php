@@ -132,6 +132,23 @@ class CitaController extends Controller
             'code'=> 200, 
         ),200);
     }
+    //
+    public function delete(Request $request){
+
+        $id = $request->id;
+
+        //SELECT *FROM citas WHERE id=1;
+        $cita=cita::find($id);
+
+        $cita-> delete();
+
+        return response()->json(array(
+            'message'=> "cita eliminada",
+            'data'=>$cita,
+            'code'=>200,
+        ),200);
+
+    } 
 
     //HorarioController
 
@@ -258,4 +275,21 @@ class CitaController extends Controller
             'code'=> 200, 
         ),200);
     }
+    //Inserta un nuevo elemeto la tabla
+    public function deleteHorario(Request $request){
+
+        $id = $request->id;
+
+        //SELECT *FROM categorias WHERE id=1;
+        $horario=horario::find($id);
+
+        $horario-> delete();
+
+        return response()->json(array(
+            'message'=> "horario eliminado",
+            'data'=>$horario,
+            'code'=>200,
+        ),200);
+
+    } 
 }

@@ -129,5 +129,22 @@ class PerfilDoctorController extends Controller
             'code'=> 200, 
         ),200);
     }
+    //
+    public function delete(Request $request){
+
+        $id = $request->id;
+
+        //SELECT *FROM perfils WHERE id=1;
+        $perfil=perfil::find($id);
+
+        $perfil-> delete();
+
+        return response()->json(array(
+            'message'=> "perfil eliminada",
+            'data'=>$perfil,
+            'code'=>200,
+        ),200);
+
+    } 
 
 }
