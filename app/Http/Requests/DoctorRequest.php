@@ -34,7 +34,7 @@ class DoctorRequest extends FormRequest
               ),
               //falta validacion de correo
              'email'=>array(
-                 'required'
+                 'required','regex:[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}'
              ),
              'password'=>array(
                 'required'
