@@ -106,7 +106,7 @@ class PerfilDoctorController extends Controller
 
         //3.Sobreescribimos la info existente
         //la variable trae la info del perfil UPDATE perfil SET names = ? WHERE dui = ?
-
+        $perfil->doc_id=$request->doc_id;
         $perfil->redes_sociales_id=$request->redes_sociales_id;
         $perfil->nombre=$request->nombre;
         $perfil->especialidad=$request->especialidad;
