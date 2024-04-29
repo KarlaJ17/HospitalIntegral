@@ -47,6 +47,13 @@ Route::post('especialidad/store',array(
     'store',
 ))->name('especialidad.store'); 
 
+//ruta seria http://localhost:8000/api/especialidad/destroy
+Route::delete('/especialidad/delete/{nombre}', array(
+    EspecialidadController::class,
+    'destroy'
+))->name('especialidad.destroy');
+
+
 
 //RUTAS PerfilDoctorController
 //http://localhost:8000/api/perfil/index
@@ -67,6 +74,12 @@ Route::post('perfil/store',array(
     'store',
 ))->name('perfil.store'); 
 
+//ruta seria http://localhost:8000/api/perfil/destroy
+Route::delete('/perfil/delete/{nombre}', array(
+    PerfilDoctorController::class,
+    'destroy'
+))->name('perfil.destroy');
+
 
 //RUTAS DoctorController
 //http://localhost:8000/api/doctor/index
@@ -86,6 +99,12 @@ Route::post('doctor/store',array(
     DoctorController::class,
     'store',
 ))->name('doctor.store'); 
+
+//ruta seria http://localhost:8000/api/doctor/destroy
+Route::delete('/doctor/delete/{nombre}', array(
+    DoctorController::class,
+    'destroy'
+))->name('doctor.destroy');
 
 
 
@@ -110,6 +129,12 @@ Route::post('horario/store',array(
     'storeHorario',
 ))->name('horario.store'); 
 
+//ruta seria http://localhost:8000/api/horario/destroy
+Route::delete('/horario/delete/{dia}{hora}', array(
+    HorarioController::class,
+    'destroy'
+))->name('horario.destroy');
+
 
 //CitaModel 
 //http://localhost:8000/api/cita/index
@@ -130,5 +155,109 @@ Route::post('cita/store',array(
     'store',
 ))->name('cita.store'); 
 
+//ruta seria http://localhost:8000/api/cita/destroy
+Route::delete('/cita/delete/{fecha}', array(
+    CitaController::class,
+    'destroy'
+))->name('cita.destroy');
 
 
+
+//PacienteCitaModel 
+
+//http://localhost:8000/api/pacientecita/index
+Route::get('/pacienteCita/index',array(   //el mismo nombre de abajo 
+    CitaController::class, //controlador
+    'indexPacienteCita', //metodo
+))->name('pacientecita.index');  //poner el nombre de la ruta despues del punto controlador/metodo
+
+
+
+
+//RUTAS EXPEDIENTE MODEL
+
+//http://localhost:8000/api/expediente/index
+Route::get('/expediente/index',array(   //el mismo nombre de abajo 
+    ExpedienteController::class, //controlador
+    'index', //metodo
+))->name('expediente.index');  //poner el nombre de la ruta despues del punto controlador/metodo
+
+//http://localhost:8000/api/expediente/show/karla
+Route::get('expediente/show/{nombre}',array(   //
+    ExpedienteController::class,
+    'show',
+))->name('expediente.show'); 
+
+//http://localhost:8000/api/expediente/store
+Route::post('expediente/store',array(   
+    ExpedienteController::class,
+    'store',
+))->name('expediente.store'); 
+
+//ruta seria http://localhost:8000/api/expediente/destroy
+Route::delete('/expediente/delete/{nombre}', array(
+    ExpedienteController::class,
+    'destroy'
+))->name('expediente.destroy');
+
+
+//RUTAS REFERENCIA MODEL
+
+//http://localhost:8000/api/referencia/index
+Route::get('/referencia/index',array(   //el mismo nombre de abajo 
+    ReferenciaController::class, //controlador
+    'index', //metodo
+))->name('referencia.index');  //poner el nombre de la ruta despues del punto controlador/metodo
+
+//http://localhost:8000/api/referencia/show/karla
+Route::get('referencia/show/{nombre}',array(   //
+   ReferenciaController::class,
+    'show',
+))->name('referencia.show'); 
+
+//http://localhost:8000/api/referencia/store
+Route::post('referencia/store',array(   
+   ReferenciaController::class,
+    'store',
+))->name('referencia.store'); 
+
+//ruta seria http://localhost:8000/api/referencia/destroy
+Route::delete('/referencia/delete/{nombre}', array(
+    ReferenciaController::class,
+    'destroy'
+))->name('referencia.destroy');
+
+
+
+//RECETA MODEL
+
+//http://localhost:8000/api/receta/index
+Route::get('/receta/index',array(   //el mismo nombre de abajo 
+    RecetaController::class, //controlador
+    'index', //metodo
+))->name('receta.index');  //poner el nombre de la ruta despues del punto controlador/metodo
+
+//http://localhost:8000/api/receta/show/karla
+Route::get('receta/show/{nombre}',array(   //
+   RecetaController::class,
+    'show',
+))->name('receta.show'); 
+
+//http://localhost:8000/api/receta/store
+Route::post('receta/store',array(   
+   RecetaController::class,
+    'store',
+))->name('receta.store'); 
+
+//ruta seria http://localhost:8000/api/receta/destroy
+Route::delete('/receta/delete/{nombre}', array(
+    RecetaController::class,
+    'destroy'
+))->name('receta.destroy');
+
+
+
+
+
+//RUTAS LISTAS
+/*especialidad, perfil doctor, doctor, cita, horario, pacienteCita, expediente, referencia, receta*/
