@@ -257,7 +257,89 @@ Route::delete('/receta/delete/{nombre}', array(
 
 
 
+//VALORACION MODEL
+
+//http://localhost:8000/api/valoracion/index
+Route::get('/valoracion/index',array(   //el mismo nombre de abajo 
+    ValoracionController::class, //controlador
+    'index', //metodo
+))->name('valoracion.index');  //poner el nombre de la ruta despues del punto controlador/metodo
+
+//http://localhost:8000/api/valoracion/show/karla
+Route::get('valoracion/show/{nombre}',array(   //
+   ValoracionController::class,
+    'show',
+))->name('valoracion.show'); 
+
+//http://localhost:8000/api/valoracion/store
+Route::post('valoracion/store',array(   
+  ValoracionController::class,
+    'store',
+))->name('valoracion.store'); 
+
+//ruta seria http://localhost:8000/api/valoracion/destroy
+Route::delete('/valoracion/delete/{nombre}', array(
+   ValoracionController::class,
+    'destroy'
+))->name('valoracion.destroy');
 
 
 //RUTAS LISTAS
-/*especialidad, perfil doctor, doctor, cita, horario, pacienteCita, expediente, referencia, receta*/
+/*especialidad, perfil doctor, doctor, cita, horario, pacienteCita, expediente, referencia, receta, valoracion*/
+
+Route::group(array(  //Arreglo de configuracion. 
+
+    'prefix' => "auth"  //<-Prefijo global del grupo.
+), function(){
+
+    // POST -> /api/auth/register
+//ruta seria http://localhost:8000/api/auth.register
+    Route::post('register', array(
+        AuthController::class,
+        'register'
+    ))->name('auth.register');
+
+//ruta seria http://localhost:8000/api/auth.login
+      // POST -> /api/auth/login. 
+    Route::post('login', array(
+        AuthController::class,
+        'login'
+    ))->name('auth.login');
+
+    //ruta seria http://localhost:8000/api/auth.logout
+    // GET ->  /api/auth/logout
+    Route::get('logout', array(
+        AuthController::class,
+        'logout'
+    ))
+    ->middleware(['auth:api'])
+    ->name('auth.logout');
+
+    //ruta seria http://localhost:8000/api/auth.profile
+       // GET ->  /api/auth/logout
+       Route::get('/profile', array(
+        AuthController::class,
+        'profile'
+    ))
+    ->middleware(['auth:api'])
+    ->name('auth.profile');
+
+
+    //ruta seria http://localhost:8000/api/password.sent
+    //Ruta para enviar correo de cambio. 
+    Route::post('/forgot-password', array(
+        AuthController::class,
+        'sendResetLink'
+    ))->name('password.sent');
+
+    //ruta seria http://localhost:8000/api/password.reset
+
+    //Ruta para relizar cambio de contraseña. 
+    Route::post('/reset-password', array(
+        AuthController::class,
+        'resetPassword'
+    ))->name('password.reset');
+});
+
+
+
